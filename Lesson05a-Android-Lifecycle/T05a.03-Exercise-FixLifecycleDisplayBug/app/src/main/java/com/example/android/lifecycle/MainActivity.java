@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mLifecycleDisplay;
 
     // COMPLETED (1) Declare and instantiate a static ArrayList of Strings called mLifecycleCallbacks
-    private static ArrayList<String> mLifecycleCallbacks  = new ArrayList<>();
+    private static final ArrayList<String> mLifecycleCallbacks  = new ArrayList<>();
 
     /**
      * Called when the activity is first created. This is where you should do all of your normal
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
 
         // COMPLETED (2) Add the ON_STOP String to the front of mLifecycleCallbacks
-        mLifecycleCallbacks.add(ON_STOP);
+        mLifecycleCallbacks.add(0, ON_STOP);
         logAndAppend(ON_STOP);
     }
 
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
 
         // COMPLETED (3) Add the ON_DESTROY String to the front of mLifecycleCallbacks
-        mLifecycleCallbacks.add(ON_DESTROY);
+        mLifecycleCallbacks.add(0, ON_DESTROY);
         logAndAppend(ON_DESTROY);
     }
 
