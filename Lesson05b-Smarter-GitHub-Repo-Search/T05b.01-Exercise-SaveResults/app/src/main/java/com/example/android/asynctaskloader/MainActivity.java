@@ -171,9 +171,10 @@ public class MainActivity extends AppCompatActivity {
     // Do the following steps within onSaveInstanceState
     // COMPLETED (4) Make sure super.onSaveInstanceState is called before doing anything else
 
+
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
         Log.d(TAG, "onSaveInstanceState:");
         // COMPLETED (5) Put the contents of the TextView that contains our URL into a variable
@@ -186,5 +187,12 @@ public class MainActivity extends AppCompatActivity {
 
         String rawResult = mSearchResultsTextView.getText().toString();
         outState.putString(QUERY_URL_RESULT_KEY, rawResult);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+
+
     }
 }
