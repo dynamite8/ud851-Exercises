@@ -49,13 +49,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
             if (!(p instanceof CheckBoxPreference)) {
                 String value = sharedPreferences.getString(p.getKey(), "");
                 setPreferenceSummary(p, value);
-
-                // TODO (3) Add the OnPreferenceChangeListener specifically to the EditTextPreference
-                if (p instanceof EditTextPreference) {
-                    EditTextPreference editTextPreference = (EditTextPreference) p;
-                    p.setOnPreferenceChangeListener(this);
-                }
             }
+        }
+
+        // COMPLETED (3) Add the OnPreferenceChangeListener specifically to the EditTextPreference
+        Preference editTextPreference = findPreference(getString(R.string.pref_size_key));
+        if (editTextPreference != null) {
+            editTextPreference.setOnPreferenceChangeListener(this);
         }
     }
 
@@ -112,9 +112,10 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
             } catch (Exception e) {
                 // Do nothing
                 error.show();
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     @Override
