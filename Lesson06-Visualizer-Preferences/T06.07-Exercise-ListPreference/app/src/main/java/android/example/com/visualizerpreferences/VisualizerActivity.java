@@ -60,9 +60,14 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
         mVisualizerView.setShowTreble(sharedPreferences.getBoolean(getString(R.string.pref_show_treble_key),
                 getResources().getBoolean(R.bool.pref_show_treble_default)));
         mVisualizerView.setMinSizeScale(1);
-        mVisualizerView.setColor(getString(R.string.pref_color_red_value));
+        loadColorPreference(sharedPreferences);
         // Register the listener
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    private void loadColorPreference(SharedPreferences sharedPreferences) {
+        mVisualizerView.setColor(sharedPreferences.getString("color_setting",
+                getResources().getString(R.string.pref_color_green_value)));
     }
 
     @Override
@@ -74,6 +79,7 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
         } else if (key.equals(getString(R.string.pref_show_treble_key))) {
             mVisualizerView.setShowTreble(sharedPreferences.getBoolean(key, getResources().getBoolean(R.bool.pref_show_treble_default)));
         }
+        loadColorPreference(sharedPreferences);
     }
 
     @Override
