@@ -49,8 +49,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements OnShar
                 setPreferenceSummary(preference, value);
             }
         }
-
-        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
 
     // COMPLETED (4) Override onSharedPreferenceChanged and, if it is not a checkbox preference,
@@ -58,7 +56,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements OnShar
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Preference preference = findPreference(key);
-        if (!(preference instanceof CheckBoxPreference)) {
+        if (preference != null && !(preference instanceof CheckBoxPreference)) {
             setPreferenceSummary(preference, sharedPreferences.getString(preference.getKey(), ""));
         }
     }
@@ -80,6 +78,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements OnShar
 
     // COMPLETED (5) Register and unregister the OnSharedPreferenceChange listener (this class) in
     // onCreate and onDestroy respectively.
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+    }
+
     @Override
     public void onDestroy() {
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
