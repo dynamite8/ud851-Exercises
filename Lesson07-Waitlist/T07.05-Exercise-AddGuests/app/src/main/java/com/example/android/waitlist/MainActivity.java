@@ -85,14 +85,15 @@ public class MainActivity extends AppCompatActivity {
         // COMPLETED (12) Make sure you surround the Integer.parseInt with a try catch and log any exception
         try {
             partySize = Integer.parseInt(mNewPartySizeEditText.getText().toString());
-        } catch (Exception e) {
-
+        } catch (Exception ex) {
+            Log.e(LOG_TAG, "Failed to parse party size text to number: " + ex.getMessage());
         }
 
         // COMPLETED (14) call addNewGuest with the guest name and party size
         addGuest(mNewGuestNameEditText.getText().toString(), partySize);
 
         // COMPLETED (19) call mAdapter.swapCursor to update the cursor by passing in getAllGuests()
+        // Update the cursor in the adapter to trigger UI to display the new list
         mAdapter.swapCursor(getAllGuests());
 
         // COMPLETED (20) To make the UI look nice, call .getText().clear() on both EditTexts, also call clearFocus() on mNewPartySizeEditText
