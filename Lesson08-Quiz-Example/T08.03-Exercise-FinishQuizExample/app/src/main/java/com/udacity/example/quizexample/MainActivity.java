@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView wordTextView;
     private TextView definitionTextView;
 
+    private int mDefCol;
+    private int mWordCol;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,10 +108,8 @@ public class MainActivity extends AppCompatActivity {
             mData.moveToFirst();
         }
 
-        String word = mData.getString(mData.getColumnIndex(DroidTermsExampleContract.COLUMN_WORD));
-        String definition = mData.getString(mData.getColumnIndex(DroidTermsExampleContract.COLUMN_DEFINITION));
-        wordTextView.setText(word);
-        definitionTextView.setText(definition);
+        wordTextView.setText(mData.getString(mWordCol));
+        definitionTextView.setText(mData.getString(mDefCol));
         definitionTextView.setVisibility(View.INVISIBLE);
 
         mCurrentState = STATE_HIDDEN;
@@ -158,6 +159,11 @@ public class MainActivity extends AppCompatActivity {
 
             // Set the data for MainActivity
             mData = cursor;
+
+            // Get the column index, in the Cursor, of each piece of data
+            // Do this once so that we can reuse these index as they won't change
+            mDefCol = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_DEFINITION);
+            mWordCol = mData.getColumnIndex(DroidTermsExampleContract.COLUMN_WORD);
 
             // COMPLETED (2) Initialize anything that you need the cursor for, such as setting up
             // the screen with the first word and setting any other instance variables
