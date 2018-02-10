@@ -16,9 +16,8 @@
 
 package com.example.android.todolist.data;
 
+import android.net.Uri;
 import android.provider.BaseColumns;
-
-import java.net.URI;
 
 
 public class TaskContract {
@@ -33,9 +32,8 @@ public class TaskContract {
       */
 
     public static final String AUTHORITY = "com.example.android.todolist";
-    public static final String CONTENT_PROVIDER = "com.example.android.todolist.data.TaskContentProvider";
-    public static final URI BASE_CONTENT = URI.create("content://" + CONTENT_PROVIDER);
-    public static final String TASKS_DIRECTORY_PATH = "/tasks";
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
+    public static final String TASKS_DIRECTORY_PATH = "tasks";
 
     /* TaskEntry is an inner class that defines the contents of the task table */
     public static final class TaskEntry implements BaseColumns {
@@ -43,6 +41,9 @@ public class TaskContract {
 
         // Task table and column names
         public static final String TABLE_NAME = "tasks";
+
+        public static final Uri CONTENT_URL = BASE_CONTENT_URI.buildUpon().
+                appendPath(TASKS_DIRECTORY_PATH).build();
 
         // Since TaskEntry implements the interface "BaseColumns", it has an automatically produced
         // "_ID" column in addition to the two below
