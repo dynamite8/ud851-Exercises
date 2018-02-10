@@ -96,13 +96,20 @@ public class MainActivity extends AppCompatActivity {
         // COMPLETED (3) Go to the next word in the Cursor, show the next word and hide the definition
         // Note that you shouldn't try to do this if the cursor hasn't been set yet.
         // If you reach the end of the list of words, you should start at the beginning again.
-        if (mData.moveToNext()) {
-            String word = mData.getString(mData.getColumnIndex(DroidTermsExampleContract.COLUMN_WORD));
-            String definition = mData.getString(mData.getColumnIndex(DroidTermsExampleContract.COLUMN_DEFINITION));
-            wordTextView.setText(word);
-            definitionTextView.setText(definition);
-            definitionTextView.setVisibility(View.INVISIBLE);
+        if (mData == null) {
+            return;
         }
+
+        // if we're at the end, cycle back to the first word
+        if (!mData.moveToNext()) {
+            mData.moveToFirst();
+        }
+
+        String word = mData.getString(mData.getColumnIndex(DroidTermsExampleContract.COLUMN_WORD));
+        String definition = mData.getString(mData.getColumnIndex(DroidTermsExampleContract.COLUMN_DEFINITION));
+        wordTextView.setText(word);
+        definitionTextView.setText(definition);
+        definitionTextView.setVisibility(View.INVISIBLE);
 
         mCurrentState = STATE_HIDDEN;
 
@@ -154,14 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
             // COMPLETED (2) Initialize anything that you need the cursor for, such as setting up
             // the screen with the first word and setting any other instance variables
-            if (mData.moveToNext()) {
-                String word = mData.getString(mData.getColumnIndex(DroidTermsExampleContract.COLUMN_WORD));
-                String definition = mData.getString(mData.getColumnIndex(DroidTermsExampleContract.COLUMN_DEFINITION));
-
-                wordTextView.setText(word);
-                definitionTextView.setText(definition);
-                definitionTextView.setVisibility(View.INVISIBLE);
-            }
+            nextWord();
         }
     }
 
