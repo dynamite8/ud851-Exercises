@@ -181,7 +181,7 @@ public class TaskContentProvider extends ContentProvider {
         if (numberOfRowsDeleted != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
-        
+
         return numberOfRowsDeleted;
     }
 
