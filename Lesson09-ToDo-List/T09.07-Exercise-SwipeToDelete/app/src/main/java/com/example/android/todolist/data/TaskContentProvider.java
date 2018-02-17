@@ -192,7 +192,23 @@ public class TaskContentProvider extends ContentProvider {
     public int update(@NonNull Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
 
-        throw new UnsupportedOperationException("Not yet implemented");
+        int match = sUriMatcher.match(uri);
+
+        int tasksUpdated = 0;
+
+        switch (match) {
+            case TASK_WITH_ID:
+                String id = uri.getPathSegments().get(1);
+                tasksUpdated = mTaskDbHelper.getWritableDatabase().update(TABLE_NAME, values,"_id=?", new String[]{id});
+                break;
+            default:
+                throw new UnsupportedOperationException("Not yet implemented");
+        }
+
+        if (tasksUpdated != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return tasksUpdated;
     }
 
 
