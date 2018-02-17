@@ -25,6 +25,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.app.TaskStackBuilder;
 
 import static com.example.android.todolist.data.TaskContract.TaskEntry.TABLE_NAME;
 
@@ -215,7 +216,20 @@ public class TaskContentProvider extends ContentProvider {
     @Override
     public String getType(@NonNull Uri uri) {
 
-        throw new UnsupportedOperationException("Not yet implemented");
+        String type = "";
+        int match = sUriMatcher.match(uri);
+        switch (match) {
+            case TASKS:
+                type = "vnd.android.cursor.dir" + "/" + TaskContract.AUTHORITY + "/" + TaskContract.PATH_TASKS;
+                break;
+            case TASK_WITH_ID:
+                type = "vnd.android.cursor.item" + "/" + TaskContract.AUTHORITY + "/" + TaskContract.PATH_TASKS;
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri");
+        }
+
+        return type;
     }
 
 }
