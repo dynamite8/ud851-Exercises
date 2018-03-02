@@ -43,7 +43,7 @@ public class NotificationUtils {
      * can be handy when we need to cancel the notification, or perhaps update it. This number is
      * arbitrary and can be set to whatever you like. 1138 is in no way significant.
      */
-    private static final int WATER_REMINDER_NOTIFICATION_ID = 3018;
+    private static final int WATER_REMINDER_NOTIFICATION_ID = 1138;
     /**
      * This pending intent id is used to uniquely reference the pending intent
      */
@@ -52,7 +52,6 @@ public class NotificationUtils {
      * This notification channel id is used to link notifications to this channel
      */
     private static final String WATER_REMINDER_NOTIFICATION_CHANNEL_ID = "reminder_notification_channel";
-
     private static final int ACTION_IGNORE_PENDING_INTENT_ID = 3023;
     private static final int ACTION_DRINK_WATER_PENDING_INTENT_ID = 3024;
 
@@ -104,8 +103,13 @@ public class NotificationUtils {
     public static NotificationCompat.Action ignoreReminderAction(Context context) {
         Intent intent = new Intent(context, WaterReminderIntentService.class);
         intent.setAction(ReminderTasks.ACTION_DISMISS_NOTIFICATION);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, ACTION_IGNORE_PENDING_INTENT_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        NotificationCompat.Action action = new NotificationCompat.Action(R.drawable.ic_cancel_black_24px, "No, thanks.", pendingIntent);
+        PendingIntent pendingIntent = PendingIntent.getService(context,
+                ACTION_IGNORE_PENDING_INTENT_ID,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.Action action = new NotificationCompat.Action(R.drawable.ic_cancel_black_24px,
+                "No, thanks.",
+                pendingIntent);
         return action;
     }
 
@@ -118,8 +122,13 @@ public class NotificationUtils {
     public static NotificationCompat.Action drinkWaterAction(Context context) {
         Intent intent = new Intent(context, WaterReminderIntentService.class);
         intent.setAction(ReminderTasks.ACTION_INCREMENT_WATER_COUNT);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, ACTION_DRINK_WATER_PENDING_INTENT_ID, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        NotificationCompat.Action action = new NotificationCompat.Action(R.drawable.ic_local_drink_black_24px, "I did it!", pendingIntent);
+        PendingIntent pendingIntent = PendingIntent.getService(context,
+                ACTION_DRINK_WATER_PENDING_INTENT_ID,
+                intent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+        NotificationCompat.Action action = new NotificationCompat.Action(R.drawable.ic_local_drink_black_24px,
+                "I did it!",
+                pendingIntent);
         return action;
     }
 
