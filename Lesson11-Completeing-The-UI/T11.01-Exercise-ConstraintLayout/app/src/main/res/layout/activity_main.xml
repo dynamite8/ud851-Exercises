@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- COMPLETED (17) Surround the Constraint layout with a ScrollView -->
 <!-- COMPLETED (2) Replace the Relative layout with a ConstraintLayout -->
+
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,9 +17,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
     <!-- COMPLETED (3) Create a TextView for the Passenger label and name -->
     <!-- COMPLETED (4) Use tool:text to set the text value -->
     <TextView
@@ -348,6 +353,7 @@
         app:layout_constraintEnd_toEndOf="@+id/divider"
         app:layout_constraintStart_toStartOf="@+id/divider"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
-    </android.support.v4.widget.NestedScrollView>
+
 </android.support.constraint.ConstraintLayout>
 
+</ScrollView>
