@@ -292,34 +292,38 @@
 
     <TextView
         android:id="@+id/textViewTerminalLabel"
-        android:layout_width="120dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/terminal_label"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/tableHeaderImage"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTerminal"
         app:layout_constraintStart_toStartOf="@+id/tableHeaderImage"
-        app:layout_constraintTop_toTopOf="@+id/tableHeaderImage" />
+        app:layout_constraintTop_toTopOf="@id/tableHeaderImage"
+        app:layout_constraintBottom_toBottomOf="@id/tableHeaderImage"
+        />
 
     <TextView
         android:id="@+id/textViewGateLabel"
-        android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:text="@string/gate_label"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/tableHeaderImage"
-        app:layout_constraintEnd_toStartOf="@+id/textViewSeatLabel"
-        app:layout_constraintStart_toEndOf="@+id/textViewTerminalLabel"
-        app:layout_constraintTop_toTopOf="@+id/tableHeaderImage" />
+        app:layout_constraintTop_toTopOf="@id/tableHeaderImage"
+        app:layout_constraintBottom_toBottomOf="@id/tableHeaderImage"
+        app:layout_constraintEnd_toStartOf="@+id/textViewGate"
+        app:layout_constraintStart_toEndOf="@+id/textViewGate"
+        />
 
     <TextView
         android:id="@+id/textViewSeatLabel"
-        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
+        android:layout_width="wrap_content"
         android:text="@string/seat_label"
-        app:layout_constraintBottom_toBottomOf="@+id/tableHeaderImage"
-        app:layout_constraintEnd_toEndOf="@+id/tableHeaderImage"
-        app:layout_constraintTop_toTopOf="@+id/tableHeaderImage" />
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="@id/tableHeaderImage"
+        app:layout_constraintBottom_toBottomOf="@id/tableHeaderImage"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSeat"
+        app:layout_constraintStart_toStartOf="@+id/textViewSeat" />
 
     <!-- COMPLETED (13) Create a TextView for each of the labels and text fields in the blue table -->
 
@@ -336,7 +340,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@mipmap/barcode"
         app:layout_constraintTop_toBottomOf="@id/tableImage"
-        tools:layout_editor_absoluteY="390dp" />
+        />
 
     <TextView
         android:id="@+id/textViewFlightCode"
