@@ -53,14 +53,15 @@
     COMPLETED (5) Add an include tag in activity_main to include flightInfo in the right position
 -->
 
-    <include layout="@layout/flight_info"
-        android:id="@+id/flightInfo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewPassengerName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        <include layout="@layout/flight_info"
+            android:id="@+id/flightInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewPassengerName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/boardingInfo"
+            />
+
 
     <!--
     COMPLETED (4) Move all Views in the boarding information table from activity_main to boarding_info
@@ -71,10 +72,9 @@
             android:id="@+id/boardingInfo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/flightInfo"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/flightInfo"
+            app:layout_constraintStart_toEndOf="@id/flightInfo"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="32dp"
             />
 
 
@@ -85,7 +85,8 @@
             android:id="@+id/barcode"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/boardingInfo"
+            app:layout_constraintTop_toBottomOf="@+id/boardingInfo"
+            app:layout_constraintStart_toEndOf="@id/flightInfo"
             android:layout_marginTop="16dp"
             />
 
